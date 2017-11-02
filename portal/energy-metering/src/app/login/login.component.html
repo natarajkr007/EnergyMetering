@@ -1,3 +1,16 @@
-<p>
-  login works!
-</p>
+<div [formGroup]="loginForm" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="Username" type="text" formControlName="username">
+    <mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-error>
+      </mat-error>
+  </mat-form-field>
+  
+  <button mat-raised-button [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>
+  
+</div>
