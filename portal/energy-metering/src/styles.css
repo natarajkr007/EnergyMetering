@@ -3,3 +3,11 @@
 body {
     margin: 0;
 }
+
+button {
+    outline: none !important;
+}
+
+.flex-box {
+    display: flex;
+}

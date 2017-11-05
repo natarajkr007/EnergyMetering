@@ -4,5 +4,7 @@
     <button mat-button routerLink="/home">Home</button>
   </span>
   <span class="spacer"></span>
-  <span *ngIf="loginPage"><button mat-button routerLink="/login">Login</button></span>
+  <span *ngIf="registerPage"><button mat-button routerLink="/login">Login</button></span>
+  <span *ngIf="loginPage"><button mat-button routerLink="/register">Sign Up</button></span>
+  <span *ngIf="!loginPage && !registerPage"><button mat-button routerLink="/logout">Logout</button></span>
 </mat-toolbar>

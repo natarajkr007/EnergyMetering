@@ -1,16 +1,29 @@
-<div [formGroup]="loginForm" novalidate>
-  <mat-form-field>
-    <input matInput placeholder="Username" type="text" formControlName="username">
-    <mat-error>
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Password" type="password" formControlName="password">
-      <mat-error>
-      </mat-error>
-  </mat-form-field>
-  
-  <button mat-raised-button [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>
-  
+<div class="container-fluid">
+  <div class="col-md-4 offset-md-4">
+    <div class="login-box" [formGroup]="loginForm" novalidate>
+      <div class="row">
+        <div class="col-md-12 justify-content-center flex-box">
+          <mat-form-field>
+            <input matInput placeholder="Username" type="text" formControlName="username">
+            <mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 justify-content-center flex-box">
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 justify-content-center flex-box">
+          <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>          
+        </div>
+      </div>
+    </div>
+  </div>     
 </div>
