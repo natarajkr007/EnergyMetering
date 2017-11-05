@@ -45,7 +45,8 @@ module.exports = function(app, route, jwt, User) {
           res.json({
             success: true,
             message: 'token sent',
-            token: token
+            token: token,
+            user: user
           });
         }
       }

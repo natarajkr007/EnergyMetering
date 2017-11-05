@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+  <span>Energy Metering</span>
+  <span>
+    <button mat-button routerLink="/home">Home</button>
+  </span>
+  <span class="spacer"></span>
+  <span *ngIf="loginPage"><button mat-button routerLink="/login">Login</button></span>
+</mat-toolbar>

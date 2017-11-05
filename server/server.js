@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var mongoose = require('mongoose');
 var morgan = require('morgan');
@@ -28,6 +29,9 @@ db.once('open', function() {
 mongoose.Promise = global.Promise;
 
 app.set('dadKey', configAuth.secret);
+
+// to enable cors
+app.use(cors()); // cors enables for all domains
 
 // CHECK body-parser docs once
 app.use(bodyParser.urlencoded({extended: false}));

@@ -10,13 +10,23 @@ import { UrlInterceptor } from './url.interceptor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 import { appRoutes } from './app.routes';
+import { LogoutComponent } from './logout/logout.component';
+import { TopbarComponent } from './topbar/topbar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    LogoutComponent,
+    TopbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

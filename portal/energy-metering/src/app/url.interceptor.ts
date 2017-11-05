@@ -6,11 +6,11 @@ import { Observable } from 'rxjs/observable';
 export class UrlInterceptor implements HttpInterceptor {
   intercept (req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const absUrl: String = 'http://localhost:3000/api';
-    const absUrlReq = req.clone({
-      url: absUrl + req.url
+    req = req.clone({
+      url: absUrl + req.url,
+      headers: req.headers.set('Content-Type', 'application/json')
     });
-    console.log(absUrlReq);
-    
-    return next.handle(absUrlReq);
+    console.log(req);
+    return next.handle(req);
   }
 }

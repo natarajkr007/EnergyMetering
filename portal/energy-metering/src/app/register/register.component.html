@@ -1,0 +1,28 @@
+<div [formGroup]="registerForm" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="Firstname" type="text" formControlName="firstname">
+    <mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Lastname" type="text" formControlName="lastname">
+      <mat-error>
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" formControlName="email">
+      <mat-error>
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-error>
+      </mat-error>
+  </mat-form-field>
+  
+  <button mat-raised-button [disabled]="registerForm.invalid" (click)="doRegister()">Register</button>
+  
+</div>
