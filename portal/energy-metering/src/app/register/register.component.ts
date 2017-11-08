@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { RegisterService } from '../services/register.service';
 import { Register } from '../models/register';
 
 @Component({
@@ -17,9 +18,12 @@ export class RegisterComponent implements OnInit {
   email: String;
   password: String;
 
-  constructor(private registerService: RegisterService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private registerService: RegisterService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    if (localStorage.getItem('token') && localStorage.getItem('user')) {
+      this.router.navigate(['/home']);
+    }
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: [''],
