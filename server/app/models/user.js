@@ -14,6 +14,9 @@ var userSchema = new Schema({
     token: String,
     email: String,
     name: String
+  },
+  device: {
+    id: [Schema.Types.ObjectId]
   }
 });
 

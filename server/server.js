@@ -9,6 +9,7 @@ var jwt = require('jsonwebtoken');
 var configDB = require('./config/database.js');
 var configAuth = require('./config/auth.js');
 var User   = require('./app/models/user');
+var Device   = require('./app/models/device');
 
 var apiRoutes = express.Router();
 
@@ -39,7 +40,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-require('./app/routes.js')(app, apiRoutes, jwt, User);
+require('./app/routes/routes.js')(app, apiRoutes, jwt, User, Device);
 app.use('/api', apiRoutes);
 
 app.listen(port);
