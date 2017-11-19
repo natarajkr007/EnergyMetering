@@ -1,4 +1,4 @@
-module.exports = function(app, route, jwt, User, Device) {
+module.exports = function(app, route, jwt, User, Device, Reading) {
 	
 	route.get('/', function(req, res) {
 		var result = [
@@ -22,6 +22,10 @@ module.exports = function(app, route, jwt, User, Device) {
 			{
 				'link-appender': '/add-device',
 				'req-type': 'POST'
+			},
+			{
+				'link-appender': '/enter-reading',
+				'req-type': 'POST'
 			}
 		];
 		res.json(result);
@@ -30,6 +34,7 @@ module.exports = function(app, route, jwt, User, Device) {
 	require('./login.js')(app, route, jwt, User);
 	require('./signup.js')(route, User);
 	require('./registerDevice.js')(route, Device);
+	require('./enterReading.js')(route, Device, Reading);
 	
 	// authentication middleware
 	require('./validators/authentication.js')(app, route, jwt);
