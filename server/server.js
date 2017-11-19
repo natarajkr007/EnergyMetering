@@ -4,6 +4,7 @@ var app = express();
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 var jwt = require('jsonwebtoken');
 var configDB = require('./config/database.js');
@@ -33,6 +34,7 @@ db.once('open', function() {
 mongoose.Promise = global.Promise;
 
 app.set('dadKey', configAuth.secret);
+app.set('geoDecodeKey', configAuth.geoDecodeKey);
 
 // to enable cors
 app.use(cors()); // cors enables for all domains
@@ -43,7 +45,7 @@ app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-require('./app/routes/routes.js')(app, apiRoutes, jwt, User, Device, Reading);
+require('./app/routes/routes.js')(app, apiRoutes, request, jwt, User, Device, Reading);
 app.use('/api', apiRoutes);
 
 app.listen(port);

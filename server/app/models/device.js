@@ -11,7 +11,10 @@ var deviceSchema = new Schema({
         type: String,
         required: true
     },
-    geometry: geoSchema
+    geometry: geoSchema,
+    address: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('Device', deviceSchema);

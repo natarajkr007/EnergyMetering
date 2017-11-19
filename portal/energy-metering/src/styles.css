@@ -1,7 +1,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
+    height: 100%;
 }
 
 button {
@@ -10,4 +15,9 @@ button {
 
 .flex-box {
     display: flex;
+}
+
+.all-center {
+    justify-content: center;
+    align-items: center;
 }
