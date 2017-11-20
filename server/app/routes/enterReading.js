@@ -15,6 +15,7 @@ module.exports = function(route, Device, Reading) {
 
                 newReading.device_id = device._id;
                 newReading.value = req.body.value;
+                newReading.date = Date.now();
 
                 newReading.save(function(err) {
                     if (err) throw err;

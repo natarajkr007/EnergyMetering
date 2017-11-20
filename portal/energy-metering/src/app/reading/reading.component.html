@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="flex-box all-center">
+      <div class="col-md-6" *ngIf="lineChartData.length > 0">
+          <div style="display: block;">
+            <canvas baseChart width="600" height="400"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
+        </div>
+    </div>
+  </div>

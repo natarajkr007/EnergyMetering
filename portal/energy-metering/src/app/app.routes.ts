@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
+import { ReadingComponent } from './reading/reading.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const appRoutes: Routes = [
@@ -23,6 +24,10 @@ export const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'reading/:device_id',
+    component: ReadingComponent
   },
   {
       path: '',

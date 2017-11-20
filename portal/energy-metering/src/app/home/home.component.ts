@@ -9,6 +9,7 @@ import { DeviceDetailService } from '../services/device-detail.service';
   providers: [DeviceDetailService]
 })
 export class HomeComponent implements OnInit {
+  devices: Object;
 
   constructor(private deviceDetailService: DeviceDetailService, private router: Router) { }
 
@@ -19,14 +20,24 @@ export class HomeComponent implements OnInit {
 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    const req = {
-      devices: user.device.id
-    };
-    this.deviceDetailService.getDeviceDetail(req).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    if (localStorage.getItem('devices')) {
+      this.devices = JSON.parse(localStorage.getItem('devices'));
+    } else {
+      const req = {
+        devices: user.device.id
+      };
+      this.deviceDetailService.getDeviceDetail(req).subscribe(
+        res => {
+          this.devices = res;
+          localStorage.setItem('devices', JSON.stringify(res));
+          window.location.reload();
+        }
+      );
+    }
+  }
+
+  getReadings(device_id) {
+    this.router.navigate(['/reading', device_id]);
   }
 
 }

@@ -46,5 +46,6 @@ module.exports = function(app, route, request, jwt, User, Device, Reading) {
 	require('./users.js')(route, User);
 	require('./addDevice.js')(route, User, Device);
 	require('./devicesDetails.js')(route, Device);
+	require('./getReadings.js')(route,Reading);
 
 }

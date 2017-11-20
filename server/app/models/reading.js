@@ -12,7 +12,7 @@ var readingSchema = new Schema({
     },
     date: {
         type: Number,
-        default: Date.now()
+        required: true
     }
 });
 

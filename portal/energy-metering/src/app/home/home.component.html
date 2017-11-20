@@ -1,5 +1,20 @@
 <div class="container">
   <div class="flex-box all-center">
-    <h3>WELCOME BACK</h3>
+    <mat-card *ngFor="let detail of devices.details">
+        <mat-card-header>
+          <!-- <div mat-card-avatar class="house-image"></div> -->
+          <mat-card-title>{{detail.address}}</mat-card-title>
+          <!-- <mat-card-subtitle>House</mat-card-subtitle> -->
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/house.jpg" alt="House">
+        <!-- <mat-card-content>
+          <p>
+          </p>
+        </mat-card-content> -->
+        <mat-card-actions>
+          <button mat-raised-button (click)="getReadings(detail._id)">Monitor</button>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+      </mat-card>
   </div>
 </div>
