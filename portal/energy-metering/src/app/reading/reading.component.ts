@@ -12,7 +12,14 @@ import { ReadingService } from '../services/reading.service';
 export class ReadingComponent implements OnInit {
   allReadings: Array<object>;
   todayReadings: Array<object> = [];
-  absToday;
+  whenReading: string;
+  absToday: Date;
+
+  now: Date = new Date();
+  year: number = this.now.getFullYear();
+  month: number = this.now.getMonth();
+  day: number = this.now.getDate();
+  Today = new Date(this.year, this.month, this.day);
 
   // GRAPH GENERATION DATA INITIALIZATION
 
@@ -37,12 +44,7 @@ export class ReadingComponent implements OnInit {
   constructor(private route: ActivatedRoute, private readingService: ReadingService, private location: Location) { }
 
   ngOnInit() {
-    const now: Date = new Date();
-    const year: number = now.getFullYear();
-    const month: number = now.getMonth();
-    const day: number = now.getDate();
-    const Today = new Date(year, month, day);
-    this.absToday = new Date(Today);
+    this.absToday = new Date(this.Today);
     this.getReadings();
   }
 
@@ -66,21 +68,46 @@ export class ReadingComponent implements OnInit {
     let flag = 0;
     this.allReadings.forEach(reading => {
       const readingDate = new Date(reading['date']);
-      if (readingDate >= this.absToday) {
+      if (readingDate.valueOf() >= this.absToday.valueOf()) {
         this.todayReadings.push(reading);
       }
       flag++;
       if (flag === this.allReadings.length) {
-        this.makeData();
+        this.makeData(this.todayReadings);
+        this.whenReading = 'Today\'s power consumption';
       }
     });
   }
 
-  makeData(): void {
+  getTodayReading(): void {
+    window.location.reload();
+  }
+
+  getYesterdayReading(): void {
+    const yesterday = new Date(this.year, this.month, this.day - 1);
+    const absYesterday = new Date(yesterday);
+    const yesterdayReadings = [];
+    let flag = 0;
+    this.allReadings.forEach(reading => {
+      const readingDate = new Date(reading['date']);
+      if ((readingDate.valueOf() >= absYesterday.valueOf()) && (readingDate.valueOf() < this.absToday.valueOf())) {
+        yesterdayReadings.push(reading);
+      }
+      flag++;
+      if (flag === this.allReadings.length) {
+        this.lineChartData = [];
+        this.lineChartLabels = [];
+        this.makeData(yesterdayReadings);
+        this.whenReading = 'Yesterday\'s power consumption';
+      }
+    });
+  }
+
+  makeData(readings): void {
     let flag = 0;
     const data = [];
     const labels = [];
-    this.todayReadings.forEach(reading => {
+    readings.forEach(reading => {
       const date = new Date(reading['date']);
       data.push(reading['value']);
       labels.push(date.getHours().toString() + ':' + date.getMinutes().toString());

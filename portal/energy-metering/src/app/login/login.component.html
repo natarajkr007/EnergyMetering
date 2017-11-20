@@ -1,33 +1,36 @@
 <div class="container-fluid">
-  <div class="col-md-4 offset-md-4">
-    <div class="login-box" [formGroup]="loginForm" novalidate>
-      <div class="row">
-        <div class="col-md-12 justify-content-center flex-box">
-          <h3 class="login-heading">Login</h3>
+  <div class="col-md-4 offset-md-4">      
+    <div class="login-box">
+      <div class="progress-bar"><mat-progress-bar aria-label="login in progress" *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-bar></div>
+      <div [formGroup]="loginForm" novalidate>
+        <div class="row">
+          <div class="col-md-12 justify-content-center flex-box">
+            <h3 class="login-heading">Login</h3>
+          </div>
         </div>
-      </div>
-      <hr class="col-md-6"/>
-      <div class="row">
-        <div class="col-md-12 justify-content-center flex-box">
-          <mat-form-field>
-            <input matInput placeholder="Username" type="text" formControlName="username">
-            <mat-error>
-            </mat-error>
-          </mat-form-field>
+        <hr class="col-md-6"/>
+        <div class="row">
+          <div class="col-md-12 justify-content-center flex-box">
+            <mat-form-field>
+              <input matInput placeholder="Username" type="text" formControlName="username">
+              <mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 justify-content-center flex-box">
-          <mat-form-field>
-            <input matInput placeholder="Password" type="password" formControlName="password">
-            <mat-error>
-            </mat-error>
-          </mat-form-field>
+        <div class="row">
+          <div class="col-md-12 justify-content-center flex-box">
+            <mat-form-field>
+              <input matInput placeholder="Password" type="password" formControlName="password">
+              <mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 justify-content-center flex-box">
-          <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>          
+        <div class="row">
+          <div class="col-md-12 justify-content-center flex-box">
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>          
+          </div>
         </div>
       </div>
     </div>

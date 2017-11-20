@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm;
   username: String;
   password: String;
+  loading = false;
 
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
    }
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
+    this.loading = true;
     this.username = this.loginForm.get('username').value;
     this.password = this.loginForm.get('password').value;
     const req: Login = {

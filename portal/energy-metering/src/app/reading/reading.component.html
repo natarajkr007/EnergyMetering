@@ -1,18 +1,31 @@
-<div class="container">
+<div class="container-fluid">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav class="sidenav">
+      <div><button type="button" mat-button (click)="getTodayReading()">Today</button></div>
+      <div><button type="button" mat-button (click)="getYesterdayReading()">Yesterday</button></div>
+    </mat-sidenav>
+    
+    <div class="flex-box all-center" style="padding: 10px 0 20px 0"><h3>{{whenReading}}</h3></div>
     <div class="flex-box all-center">
       <div class="col-md-6" *ngIf="lineChartData.length > 0">
-          <div style="display: block;">
-            <canvas baseChart width="600" height="400"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)">
-            </canvas>
-          </div>
+        <div style="display: block;">
+          <canvas baseChart width="600" height="400"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
         </div>
+      </div>
     </div>
-  </div>
+    <div class="flex-box all-center" style="margin: 50px 0 50px 0">
+      <button type="button" mat-button color="primary" (click)="sidenav.open()">
+        Change Date      
+      </button>
+    </div>
+  </mat-sidenav-container>
+</div>
