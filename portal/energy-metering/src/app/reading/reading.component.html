@@ -8,7 +8,7 @@
     <div class="flex-box all-center" style="padding: 10px 0 20px 0"><h3>{{whenReading}}</h3></div>
     <div class="flex-box all-center">
       <div class="col-md-6" *ngIf="lineChartData.length > 0">
-        <div style="display: block;">
+        <div class="chart" style="display: block;">
           <canvas baseChart width="600" height="400"
             [datasets]="lineChartData"
             [labels]="lineChartLabels"

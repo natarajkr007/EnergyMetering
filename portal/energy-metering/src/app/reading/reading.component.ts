@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ReadingService } from '../services/reading.service';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'app-reading',
@@ -10,6 +11,8 @@ import { ReadingService } from '../services/reading.service';
   providers: [ReadingService]
 })
 export class ReadingComponent implements OnInit {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+
   allReadings: Array<object>;
   todayReadings: Array<object> = [];
   whenReading: string;
@@ -26,7 +29,14 @@ export class ReadingComponent implements OnInit {
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<any> = [];
   public lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+    }]
+  }
   };
   public lineChartColors: Array<any> = [
     { // grey
@@ -40,8 +50,11 @@ export class ReadingComponent implements OnInit {
   ];
   public lineChartLegend = true;
   public lineChartType = 'line';
+  public chartUpdate = false;
 
-  constructor(private route: ActivatedRoute, private readingService: ReadingService, private location: Location) { }
+  constructor(private route: ActivatedRoute,
+              private readingService: ReadingService,
+              private location: Location) { }
 
   ngOnInit() {
     this.absToday = new Date(this.Today);
@@ -97,6 +110,7 @@ export class ReadingComponent implements OnInit {
       if (flag === this.allReadings.length) {
         this.lineChartData = [];
         this.lineChartLabels = [];
+        this.chartUpdate = true;
         this.makeData(yesterdayReadings);
         this.whenReading = 'Yesterday\'s power consumption';
       }
@@ -112,15 +126,24 @@ export class ReadingComponent implements OnInit {
       data.push(reading['value']);
       labels.push(date.getHours().toString() + ':' + date.getMinutes().toString());
       flag++;
-      if (flag === this.todayReadings.length) {
+      if (flag === readings.length) {
+        console.log(flag);
         const temp = {
           data: data,
           label: 'Enery consumption'
         };
-        this.lineChartData.push(temp);
-        this.lineChartLabels = labels;
+        this.makeChart(temp, labels);
       }
     });
+  }
+
+  makeChart(dataset, labels): void {
+    this.lineChartData = [dataset];
+    this.lineChartLabels = labels;
+    if (this.chartUpdate) {
+    this.chart.chart.config.data.labels = this.lineChartLabels;
+    }
+    this.chartUpdate = false;
   }
 
 }
